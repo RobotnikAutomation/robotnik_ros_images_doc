@@ -1,0 +1,26 @@
+ARG base_image="robotnik/ros"
+ARG ros_distro="humble"
+FROM ${base_image}:${ros_distro}-base
+
+USER root
+
+RUN apt update && \
+    apt-get install -y --no-install-recommends \
+        ros-${ROS_DISTRO}-examples-rclcpp-minimal-publisher \
+    && rm -rf /var/lib/apt/lists/*
+
+
+USER $USER_NAME
+
+ENV STARTUP_TYPE "run"
+# package to launch
+ENV ROS_BU_PKG "examples_rclcpp_minimal_publisher"
+# script of program to launch with all its arguments
+ENV ROS_BU_LAUNCH "publisher_lambda"
+
+### Required nodes to startup
+#### if true check if the NODES_TO_CHECK nodes are started up before starting the program
+ENV CHECK_NODES "false"
+#### space separted node list with full namespace
+ENV NODES_TO_CHECK ""
+ENV HEALTHCHECK_NODES "/minimal_publisher"

@@ -1,0 +1,21 @@
+---
+name: "basic"
+services:
+  publisher:
+    build:
+      context: .
+      dockerfile: Dockerfile.publisher
+      args:
+        base_image: robotnik/ros
+        ros_distro: humble
+    environment:
+      ROS_DOMAIN_ID: 0
+  subscriber:
+    build:
+      context: .
+      dockerfile: Dockerfile.subscriber
+      args:
+        base_image: robotnik/ros
+        ros_distro: humble
+    environment:
+      ROS_DOMAIN_ID: 0

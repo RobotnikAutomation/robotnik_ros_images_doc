@@ -1,0 +1,33 @@
+ARG base_image="robotnik/ros"
+ARG ros_distro="humble"
+FROM ${base_image}:${ros_distro}-builder
+
+USER root
+
+# Install required tools
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        ros-${ROS_DISTRO}-rviz2 \
+    && rm -rf /var/lib/apt/lists/*
+
+
+USER $USER_NAME
+
+# Install rosdep dependencies
+RUN --mount=type=bind,source=workspace,target=/home/$USER_NAME/robot_ws/src \
+    sudo apt-get update \
+    && rosdep update --include-eol-distros \
+    && DEBIAN_FRONTEND=noninteractive rosdep install -y --from-paths src --ignore-src --rosdistro ${ROS_DISTRO} \
+    && sudo rm -rf /var/lib/apt/lists/*
+
+# First build to get all dependencies
+RUN --mount=type=bind,source=workspace,target=/home/$USER_NAME/robot_ws/src \
+    compile_workspace.sh
+
+# Add workspace to source
+ENV ROS_SETUP_FILES "/home/$USER_NAME/robot_ws/install/local_setup.bash"
+
+# Configure startup command
+ENV STARTUP_TYPE "generic"
+# script of program to launch with all its arguments
+ENV GEN_COMMAND "sleep infinity"

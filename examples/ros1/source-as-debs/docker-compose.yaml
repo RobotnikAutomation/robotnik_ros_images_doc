@@ -1,0 +1,12 @@
+---
+name: "ros1-source-as-debs"
+services:
+  main:
+    image: robotnik/examples:noetic-source-as-debs
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        base_image: robotnik/ros
+        ros_distro: noetic
+    command: "true"

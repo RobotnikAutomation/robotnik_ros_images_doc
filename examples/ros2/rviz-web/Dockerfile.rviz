@@ -1,0 +1,25 @@
+ARG base_image="robotnik/ros"
+ARG ros_distro="humble"
+FROM ${base_image}:${ros_distro}-gui
+
+USER root
+
+RUN apt update && \
+    apt-get install -y --no-install-recommends \
+        ros-${ROS_DISTRO}-rviz-2d-overlay-msgs \
+        ros-${ROS_DISTRO}-rviz-2d-overlay-plugins \
+        ros-${ROS_DISTRO}-rviz-common \
+        ros-${ROS_DISTRO}-rviz-default-plugins \
+        ros-${ROS_DISTRO}-rviz-imu-plugin \
+        ros-${ROS_DISTRO}-rviz-ogre-vendor \
+        ros-${ROS_DISTRO}-rviz-rendering \
+        ros-${ROS_DISTRO}-rviz-satellite \
+        ros-${ROS_DISTRO}-rviz-visual-tools \
+        ros-${ROS_DISTRO}-rviz2 \
+    && rm -rf /var/lib/apt/lists/*
+
+USER $USER_NAME
+
+ENV RVIZ_CFG_FILE "/opt/ros/\${ROS_DISTRO}/share/rviz_common/default.rviz"
+ENV GUI_ZENITY_TEXT "Launching RViz2"
+ENV GUI_COMMAND "rviz2 -d \${RVIZ_CFG_FILE}"

@@ -1,0 +1,25 @@
+---
+name: "rviz-vnc"
+services:
+  builder:
+    image: ros2-examples:humble-rviz
+    build:
+      context: .
+      dockerfile: Dockerfile.rviz
+      args:
+        base_image: robotnik/ros
+        ros_distro: humble
+    command: "true"
+  talker-run:
+    image: ros2-examples:humble-rviz
+    restart: always
+    ports:
+      - target: 5900
+        published: 5900
+        protocol: tcp
+    environment:
+      ROS_DOMAIN_ID: 0
+      VNC_RFBPORT: 5900
+      RVIZ_CFG_FILE: "/opt/ros/humble/share/rviz_common/default.rviz"
+      VNC_PASSWORD: "testing"
+      VNC_GEOMETRY: "1280x1024"

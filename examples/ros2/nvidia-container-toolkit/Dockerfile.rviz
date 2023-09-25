@@ -1,0 +1,33 @@
+ARG base_image="robotnik/ros"
+ARG ros_distro="humble"
+FROM ${base_image}:${ros_distro}-base
+
+# Change to root user to install packages
+USER root
+
+# Install rviz2 package
+RUN apt update && \
+    apt-get install -y --no-install-recommends \
+        ros-${ROS_DISTRO}-rviz2 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy the rviz config file to the container
+COPY config/rviz2.rviz /robotnik.rviz
+# Change to user to run the program by default
+USER ${USER_NAME}
+
+
+# ENVIROMENT VARIABLES
+
+ENV STARTUP_TYPE "run"
+# package to launch
+ENV ROS_BU_PKG "rviz2"
+# script of program to launch with all its arguments
+ENV ROS_BU_LAUNCH "rviz2 --display-config /robotnik.rviz --ros-args -r __node:=docker_rviz"
+
+### Required nodes to startup
+#### if true check if the NODES_TO_CHECK nodes are started up before starting the program
+ENV CHECK_NODES "false"
+#### space separted node list with full namespace
+ENV NODES_TO_CHECK ""
+ENV HEALTHCHECK_NODES "/docker_rviz"

@@ -1,0 +1,12 @@
+---
+name: "ros2-source-as-debs"
+services:
+  main:
+    image: robotnik/examples:humble-source-as-debs
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        base_image: robotnik/ros
+        ros_distro: humble
+    command: "true"

@@ -1,0 +1,24 @@
+---
+name: "project"
+services:
+  workspace:
+    build:
+      context: .
+      dockerfile: Dockerfile.tools
+      args:
+        base_image: robotnik/ros
+        ros_distro: humble
+    environment:
+      ROS_DOMAIN_ID: 0
+
+      # Required for GUI (see nvidia-container-toolkit example)
+      DISPLAY: ${DISPLAY}
+      NVIDIA_VISIBLE_DEVICES: all # or 0,1,2,3 or all
+      NVIDIA_DRIVER_CAPABILITIES: all # or graphics,display
+    runtime: nvidia
+    volumes:
+      - source: ./workspace
+        target: /home/robot/robot_ws/src
+        type: bind
+    network_mode: host
+

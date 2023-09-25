@@ -1,0 +1,55 @@
+---
+name: "multiple-domains"
+services:
+  builder:
+    image: ros2-examples:humble-basic
+    build:
+      context: .
+      dockerfile: Dockerfile.chatter
+      args:
+        base_image: robotnik/ros
+        ros_distro: humble
+    command: "true"
+  talker-run:
+    image: ros2-examples:humble-basic
+    restart: always
+    environment:
+      STARTUP_TYPE: "run"
+      ROS_DOMAIN_ID: 0
+      ROS_BU_PKG: "demo_nodes_py"
+      ROS_BU_LAUNCH: "talker"
+      CHECK_NODES: "false"
+      NODES_TO_CHECK: ""
+      HEALTHCHECK_NODES: "/talker"
+  listener-run:
+    image: ros2-examples:humble-basic
+    restart: always
+    environment:
+      STARTUP_TYPE: "run"
+      ROS_DOMAIN_ID: 0
+      ROS_BU_PKG: "demo_nodes_py"
+      ROS_BU_LAUNCH: "listener"
+      CHECK_NODES: "true"
+      NODES_TO_CHECK: "/talker"
+      HEALTHCHECK_NODES: "/listener"
+  talker-launch:
+    image: ros2-examples:humble-basic
+    environment:
+      STARTUP_TYPE: "launch"
+      ROS_DOMAIN_ID: 1
+      ROS_BU_PKG: "demo_nodes_cpp"
+      ROS_BU_LAUNCH: "talker.launch.xml"
+      CHECK_NODES: "false"
+      NODES_TO_CHECK: ""
+      HEALTHCHECK_NODES: "/talker"
+  listener-launch:
+    image: ros2-examples:humble-basic
+    restart: always
+    environment:
+      STARTUP_TYPE: "launch"
+      ROS_DOMAIN_ID: 1
+      ROS_BU_PKG: "demo_nodes_cpp"
+      ROS_BU_LAUNCH: "listener.launch.xml"
+      CHECK_NODES: "true"
+      NODES_TO_CHECK: "/talker"
+      HEALTHCHECK_NODES: "/listener"

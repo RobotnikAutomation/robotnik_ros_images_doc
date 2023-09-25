@@ -1,0 +1,18 @@
+---
+name: "project"
+services:
+  workspace:
+    build:
+      context: .
+      dockerfile: Dockerfile.tools
+      args:
+        base_image: robotnik/ros
+        ros_distro: humble
+    environment:
+      ROS_DOMAIN_ID: 0
+      DISPLAY: ${DISPLAY}
+    volumes:
+      - source: ./workspace
+        target: /home/robot/robot_ws/src
+        type: bind
+    network_mode: host

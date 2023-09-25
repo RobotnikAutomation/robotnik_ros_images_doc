@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<?xml-model
+    href="http://download.ros.org/schema/package_format3.xsd"
+    schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+    <name>test_pkg</name>
+    <version>0.1.0</version>
+    <description>
+        A package to test the ROS2 workspace with container.
+    </description>
+    <maintainer email="rmartin@robotnik.es">Rafael Martín</maintainer>
+    <license>BSD</license>
+
+    <author email="rmartin@robotnik.es">Rafael Martín</author>
+    <url type="website">https://robotnik.eu</url>
+    <url type="bugtracker">https://github.com/RobotnikAutomation/test_pkg/issues</url>
+    <url type="repository">https://github.com/RobotnikAutomation/test_pkg</url>
+
+    <depend>launch</depend>
+    <depend>launch_ros</depend>
+    <depend>python3-yaml</depend>
+
+    <build_depend>ament_cmake_python</build_depend>
+
+    <export>
+        <build_type>ament_cmake</build_type>
+    </export>
+</package>

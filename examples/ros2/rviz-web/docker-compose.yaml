@@ -1,0 +1,79 @@
+---
+name: "rviz-web"
+services:
+  # Contains the rviz application
+  rviz-vnc:
+    build:
+      context: .
+      dockerfile: Dockerfile.rviz
+      args:
+        base_image: robotnik/ros
+        ros_distro: humble
+    environment:
+      ROS_DOMAIN_ID: 0
+      VNC_RFBPORT: 5900
+      RVIZ_CFG_FILE: "/opt/ros/humble/share/rviz_common/default.rviz"
+      VNC_PASSWORD: "R0b0tn1K"
+      VNC_GEOMETRY: "1280x1024"
+    restart: always
+
+  # Contains the web files and the nginx configuration
+  web-file:
+    image: robotnik/novnc:web-1.3.0-2-rc01
+    volumes:
+      - type: volume
+        source: web
+        target: /data/web
+      - type: volume
+        source: config
+        target: /data/config
+
+  # Creates the websocket to connect to the vnc server
+  websocket:
+    image: robotnik/websockify:backend-0.11.0-1
+    environment:
+      USE_ENV_CONFIG: "true"
+      VERBOSE: "true"
+      VNC_HOST: rviz-vnc
+      VNC_PORT: 5900
+      WS_PORT: 6080
+    ports:
+      - protocol: tcp
+        target: 6080
+        published: 6082
+
+  # Creates the webserver to serve the web files
+  webserver:
+    image: nginx:1.25.1-alpine3.17
+    environment:
+      NGINX_PORT: 80
+      NGINX_SERVER: localhost
+      WEBSITE_PATH: "/var/www/html/web"
+      PHP_SERVER: phpserver
+      PHP_PORT: 9000
+    ports:
+      - target: 80
+        published: 6083
+        protocol: tcp
+        mode: host
+    volumes:
+      - type: volume
+        source: web
+        target: /var/www/html/web
+      - type: volume
+        source: config
+        target: /etc/nginx/templates/
+
+  # PHP server
+  phpserver:
+    image: php:8.0.30-fpm-alpine3.16
+    environment:
+      WEBSOCKITY_PORT: 6082
+    volumes:
+      - type: volume
+        source: web
+        target: /var/www/html/web
+
+volumes:
+  web:
+  config:

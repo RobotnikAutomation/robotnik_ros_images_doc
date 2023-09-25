@@ -1,0 +1,27 @@
+---
+name: "rviz-nvidia"
+services:
+  rviz-nvidia:
+    build:
+      context: .
+      dockerfile: Dockerfile.rviz
+      args:
+        base_image: robotnik/ros
+        ros_distro: humble
+    environment:
+      ROS_DOMAIN_ID: 10
+      DISPLAY: ${DISPLAY}
+
+      # Required for nvidia container toolkit
+      NVIDIA_VISIBLE_DEVICES: 0 # or 0,1,2,3 or all
+      NVIDIA_DRIVER_CAPABILITIES: graphics,display # or all
+    runtime: nvidia
+
+    # Option 1: Use the host network
+    #network_mode: host
+
+    # Option 2: Mount the X11 socket
+    volumes:
+      - source: /tmp/.X11-unix
+        target: /tmp/.X11-unix
+        type: bind

@@ -1,0 +1,31 @@
+ARG base_image="robotnik/ros"
+ARG ros_distro="humble"
+FROM ${base_image}:${ros_distro}-base
+
+USER root
+
+RUN apt update && \
+    apt-get install -y --no-install-recommends \
+        ros-${ROS_DISTRO}-demo-nodes-py \
+        ros-${ROS_DISTRO}-demo-nodes-cpp \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --chmod=0644\
+    talker.launch.xml \
+    listener.launch.xml \
+        /opt/ros/humble/share/demo_nodes_cpp/launch/topics/
+
+USER $USER_NAME
+
+ENV STARTUP_TYPE "run"
+# package to launch
+ENV ROS_BU_PKG "demo_nodes_py"
+# script of program to launch with all its arguments
+ENV ROS_BU_LAUNCH "listener"
+
+### Required nodes to startup
+#### if true check if the NODES_TO_CHECK nodes are started up before starting the program
+ENV CHECK_NODES "true"
+#### space separted node list with full namespace
+ENV NODES_TO_CHECK ""
+ENV HEALTHCHECK_NODES "/chatter"

@@ -5,8 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-
 ## [Unreleased]
+##  [0.3.1] - 2023-09-26
+### Changed
+- All images pull the base image from docker hub before build. (#27)
+
+### Fixed
+- ros_launcher return on all subprocess finish (#28)
+
+##  [0.3.0] - 2023-09-25
+### Added
+- Added `cyclonedds` ros middleware to ros2 images (#26)
+
+### Changed
+- Updated examples and documentation (#25)
+- Changed to docker hub public repository instead of private.
+
+##  [0.2.1] - 2023-09-02
+
+### Added
+- Added `test_workspace.sh` for ros2 (#23)
+
+### Changed
+- `compile_workspace.sh`, now shows the output of the compilation (#23)
 
 ### Added
 - Added package `dh-python` on builder

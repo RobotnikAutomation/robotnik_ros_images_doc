@@ -29,6 +29,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - `compile_workspace.sh`, now shows the output of the compilation (#23)
 
+## [0.2.0] - 2023-08-31
+
 ### Added
 - Added package `dh-python` on builder
 - Added `$HOME/.local/bin` to PATH

@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - All images pull the base image from docker hub before build. (#27)
 
 ### Fixed
-    ros_launcher return on all subprocess finish (#28)
+- ros_launcher return on all subprocess finish (#28)
 
 ##  [0.3.0] - 2023-09-25
 ### Added

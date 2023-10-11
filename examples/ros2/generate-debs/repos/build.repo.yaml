@@ -1,0 +1,6 @@
+---
+repositories:
+  src/vectornav:
+    type: git
+    url: https://github.com/RobotnikAutomation/vectornav.git
+    version: ros2

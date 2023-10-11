@@ -1,0 +1,16 @@
+---
+name: "ros2-generate-debs"
+services:
+  main:
+    image: robotnik/examples:humble-source-as-debs
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        base_image: robotnik/ros
+        ros_distro: humble
+    volumes:
+      - source: ./output
+        target: /data/output
+        type: bind
+    command: tar xvf /data/debs.tar.gz -C /data/output

@@ -54,7 +54,7 @@ The following environment variables are defined in the image and can be used to 
 | Variable | Description | Default value |
 |----------|-------------|---------------|
 | `ROS_DOMAIN_ID` | Domain ID of the ROS node | `0` |
-| `RMW_IMPLEMENTATION` | RMW implementation | `rmw_fastrtps_cpp` |
+| `RMW_IMPLEMENTATION` | RMW implementation | `rmw_cyclonedds_cpp` |
 | `RCUTILS_COLORIZED_OUTPUT` | Enable colorized output | `1` |
 | `RCUTILS_LOGGING_USE_STDOUT` | Enable logging to stdout | `1` |
 | `RCUTILS_LOGGING_BUFFERED_STREAM` | Enable buffered logging | `1` |

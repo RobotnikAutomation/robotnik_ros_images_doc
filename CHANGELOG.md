@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- improved source as deb example on ros1 and ros2, now the deb are on the host machine.
+
+##  [0.4.0] - 2023-10-06
+### Added
+- Fixed architecture hardcoded now is supported `arm64` and `amd64` architectures
+- Automatic build of `amd64` and `arm64` architectures (#37)
+
+### Changed
+- Removed `-t, --tag` option from `build.sh` script, currently checking the tag from `git` (#37)
+
 ##  [0.3.1] - 2023-09-26
 ### Changed
 - All images pull the base image from docker hub before build. (#27)

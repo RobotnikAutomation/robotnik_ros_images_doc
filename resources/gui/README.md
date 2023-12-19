@@ -20,6 +20,9 @@ The following environment variables are defined in the image:
 | `VNC_GEOMETRY` | Geometry of the VNC server | None |
 | `GUI_ZENITY_TEXT` | Text to display in the zenity window | `"Robotnik ROS \${ROS_DISTRO} GUI"` |
 | `GUI_COMMAND` | Command to run in the zenity window | `"ros_launcher.sh"` |
+| `FAKE_SCREEN` |  Indicates use a fake or dummy screen on command | `false` |
+
+**NOTE:** `FAKE_SCREEN` only works with `STARTUP_TYPE` launch, run, rosmon, generic
 
 ## Installed scripts
 

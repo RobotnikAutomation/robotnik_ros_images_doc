@@ -13,6 +13,7 @@ The following environment variables are defined in the image:
 | `USER_WORKSPACE` | ROS Workspace directory of the user |
 | `ROS_DISTRO` | ROS distro |
 
+
 The following environment variables are defined in the image and can be used to configure the image:
 
 ### Startup configuration
@@ -30,6 +31,11 @@ The following environment variables are defined in the image and can be used to 
 | `ROS_BU_PKG` | ROS package to bring up | `""` |
 | `ROS_BU_LAUNCH` | ROS launch file to bring up | `""` |
 | `GEN_COMMAND` | Generic command to run | `sleep infinity` |
+
+### Interface configuration
+| Variable | Description | Default value |
+|----------|-------------|---------------|
+| `POWERLINE` | Use of the powerline prompt on bash | `false` |
 
 ### Requirements configuration
 | Variable | Description | Default value |

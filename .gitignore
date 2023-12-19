@@ -1,2 +1,3 @@
 examples/ros*/generate-debs/output/*
 !examples/ros*/generate-debs/output/.gitkeep
+resources/**/docker-compose.yaml

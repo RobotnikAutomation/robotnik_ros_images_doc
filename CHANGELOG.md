@@ -8,9 +8,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Added fastdds package on ROS2 containers allowing, allowing to use it by setting up environment variable `RMW_IMPLEMENTATION=rmw_fastrtps_cpp`
+- Added `qt5ct` package at gui container in order to show toolbar icons on QT5 applications
+- Added `FAKE_SCREEN` environment variable to allow the use fake or dummy screen on applications that requires it (only on graphical container)
+- Added update of docker tools before building on `push-build.yml` github action workflow. 
+- Added reuse flag on, `push-build.yml` so other workflow can call it .
+- Added `-x, --buildx <ARCH_LIST>` option from `build.sh` script, to select the building architectures, multiarch indicated using comma.  default value `linux/amd64,linux/arm64/v8`
+- Added login on docker-hub in order to increase the docker pull rate to 200images/6h
+- Added argument `image_prefix` for settings the image prefix for cache default empty on `build.sh`
+- Added `-i, --image-prefix` for settings the image prefix for cache default empty if flag used and not defined value is `registry.robotnik.ws/docker.io/`
+- Added `build.yaml` compose files for docker compose base building
+- Installed `apt-fast` on all images to speed up the apt downloads.
+- Added new workflows and actions for faster parallel build
+
 
 ### Changed
 - improved source as deb example on ros1 and ros2, now the deb are on the host machine.
+- Changed fzf to base image
+- Changed powerline to base image and disabled it by default, can be enabled by using environment variable `POWERLINE` to true
+- The powerline bash prompt is enabled on the graphical user interface
+- Improved `weekly-build.yml` workflow calling `push-build.yml` instead of repeating same workflow.
+- Separated the architectures on `push-build.yml` workflow so can build in parallel speeding up the building.
+- Specified the use of self-hosted runners tagged `[self-hosted, internal-robotnik, kubernetes]` to enforce the use k8s automatic generated runners on `push-build.yml` workflow
+- Specified the use of self-hosted runners tagged `[self-hosted, internal-robotnik, kubernetes]` on `public-doc.yml` workflow so github minutes are not used. 
+- Use of ros apt local mirror on `base, builder, gui`
+- Script `build.sh` now uses the docker (compose build/buildx bake) style with `docker-compose.yaml`  as configuration file
+
+### Fixed
+- Corrected expansion of variables on zenity
+- Fixed capture the return code of the command on `ros_launcher.sh`
+
+### Removed
+- Removed `-o, --host-network` option from `build.sh` script is specified on the docker-compose.yaml file
 
 ##  [0.4.0] - 2023-10-06
 ### Added

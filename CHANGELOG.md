@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.5.0] - 2023-12-19
 ### Added
 - Added fastdds package on ROS2 containers allowing, allowing to use it by setting up environment variable `RMW_IMPLEMENTATION=rmw_fastrtps_cpp`
 - Added `qt5ct` package at gui container in order to show toolbar icons on QT5 applications
@@ -19,7 +19,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `build.yaml` compose files for docker compose base building
 - Installed `apt-fast` on all images to speed up the apt downloads.
 - Added new workflows and actions for faster parallel build
-
 
 ### Changed
 - improved source as deb example on ros1 and ros2, now the deb are on the host machine.
@@ -40,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - Removed `-o, --host-network` option from `build.sh` script is specified on the docker-compose.yaml file
 
+
 ##  [0.4.0] - 2023-10-06
 ### Added
 - Fixed architecture hardcoded now is supported `arm64` and `amd64` architectures
@@ -48,12 +48,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Removed `-t, --tag` option from `build.sh` script, currently checking the tag from `git` (#37)
 
+
 ##  [0.3.1] - 2023-09-26
 ### Changed
 - All images pull the base image from docker hub before build. (#27)
 
 ### Fixed
 - ros_launcher return on all subprocess finish (#28)
+
 
 ##  [0.3.0] - 2023-09-25
 ### Added
@@ -63,16 +65,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated examples and documentation (#25)
 - Changed to docker hub public repository instead of private.
 
-##  [0.2.1] - 2023-09-02
 
+##  [0.2.1] - 2023-09-02
 ### Added
 - Added `test_workspace.sh` for ros2 (#23)
 
 ### Changed
 - `compile_workspace.sh`, now shows the output of the compilation (#23)
 
-## [0.2.0] - 2023-08-31
 
+## [0.2.0] - 2023-08-31
 ### Added
 - Added package `dh-python` on builder
 - Added `$HOME/.local/bin` to PATH
@@ -89,6 +91,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ## [0.1.0] - 2023-08-18
-
 ### Added
 - First release.

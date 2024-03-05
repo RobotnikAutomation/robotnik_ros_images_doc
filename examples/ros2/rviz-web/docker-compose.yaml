@@ -13,7 +13,7 @@ services:
       ROS_DOMAIN_ID: 0
       VNC_RFBPORT: 5900
       RVIZ_CFG_FILE: "/opt/ros/humble/share/rviz_common/default.rviz"
-      VNC_PASSWORD: "R0b0tn1K"
+      VNC_PASSWORD: "admin"
       VNC_GEOMETRY: "1280x1024"
     restart: always
 

@@ -5,6 +5,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2024-08-30
+### Added
+- `jazzy` distro images.
+- `test_workspace.sh` added support for `noetic` distro.
+- `ros_entrypoint.d` directory to add custom scripts to be executed on container startup, will be executed in alphabetical order.
+- `generate_debs.sh` script now supports `.reduce_parallel_jobs` file to reduce the number of parallel jobs on generating distribution packages.
+- Init system `tini` added to `ros_entrypoint.sh` script. All signals are forwarded to the main process instead of forwarding with `trap` in `ros_launcher.sh` script.
+- Install `rosmon-core` ros distro version by default on `ros` images, if want to override you can remove the package and install your own.
+- Extract load ros environment variables from `ros_entrypoint.sh` script to `env_loader.sh` script to be used by other scripts.
+- Added parameters select package to compile or test on `generate_debs.sh` and `test_workspace.sh` scripts.
+
+### Changed
+- Updated `rolling` distro into ubuntu `noble`.
+- Sudoer configuration moved to `sudoers.d` directory.
+- `ros_entrypoint.sh` script now uses `tini` as init system, forwarding signals to the main process and handling zombie processes.
+- `generate_debs.sh` script use utc time to generate the package version.
+- `virtualgl` package upgraded from `3.1` to `3.1.1`.
+- `turbovnc` package upgraded from `3.0.3` to `3.1.1`.
+- `GEN_COMMAND` environment variable are overriden if `CMD` container instruction is used.
+
+### Removed
+- Deleted `ros_launcher.sh` script, as moved to `ros_entrypoint.sh` script.
+- `SIGNAL_TRAP` and `SIGNAL_DESTROY` are not used anymore, as now handled by `tini` init system.
+
+### Fixed
+- Fzf installation added `v` tag to the installed version.
+- `generate_debs.sh` on one package compilation failed, the script stops.
+- `install_pcan.sh` get linux headers from internal repository, instead of host machine.
+
+
 ## [0.5.0] - 2023-12-19
 ### Added
 - Added fastdds package on ROS2 containers allowing, allowing to use it by setting up environment variable `RMW_IMPLEMENTATION=rmw_fastrtps_cpp`

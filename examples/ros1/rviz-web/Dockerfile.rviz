@@ -1,0 +1,19 @@
+ARG base_image="robotnik/ros"
+ARG ros_distro="noetic"
+FROM ${base_image}:${ros_distro}-gui
+
+USER root
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        ros-${ROS_DISTRO}-rviz-imu-plugin \
+        ros-${ROS_DISTRO}-rviz-satellite \
+        ros-${ROS_DISTRO}-rviz-visual-tools \
+        ros-${ROS_DISTRO}-rviz \
+    && rm -rf /var/lib/apt/lists/*
+
+USER $USER_NAME
+
+ENV RVIZ_CFG_FILE "/opt/ros/\${ROS_DISTRO}/share/rviz/default.rviz"
+ENV GUI_ZENITY_TEXT "Launching RViz"
+ENV GUI_COMMAND "rviz -d \${RVIZ_CFG_FILE}"

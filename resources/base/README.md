@@ -16,13 +16,6 @@ The following environment variables are defined in the image:
 
 The following environment variables are defined in the image and can be used to configure the image:
 
-### Startup configuration
-
-| Variable | Description | Default value |
-|----------|-------------|---------------|
-| `SIGNAL_TRAP` | Signal received by the entrypoint script to stop the container divided by `:` | `SIGTERM:SIGINT` |
-| `SIGNAL_DESTROY` | Signal sent to the child processes when the container is stopped | `SIGINT` |
-
 ### Launch configuration
 | Variable | Description | Default value |
 |----------|-------------|---------------|
@@ -31,6 +24,8 @@ The following environment variables are defined in the image and can be used to 
 | `ROS_BU_PKG` | ROS package to bring up | `""` |
 | `ROS_BU_LAUNCH` | ROS launch file to bring up | `""` |
 | `GEN_COMMAND` | Generic command to run | `sleep infinity` |
+
+**Note:** The `STARTUP_TYPE`, `ROS_BU_PKG`, `ROS_BU_LAUNCH`, and `GEN_COMMAND` variables are ignored if command is passed to the container.
 
 ### Interface configuration
 | Variable | Description | Default value |
@@ -74,7 +69,11 @@ The following scripts are installed in the image:
 |--------|-------------|
 | `ros_healthcheck.sh` | Script to check if the container is healthy |
 | `ros_entrypoint.sh` | Entrypoint script to start the container |
-| `ros_launcher.sh` | Script to launch the ROS nodes |
+| `env_loader.sh` | Script to load ROS environment variables |
+
+## Custom entrypoint scripts
+
+All scripts in the `ros_entrypoint.d` directory are executed in alphabetical order. The scripts must be executable and have the `.sh` extension.
 
 ## Installed packages
 

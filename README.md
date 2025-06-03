@@ -20,6 +20,7 @@ The ros distros available are:
 | 1           | Noetic     | `noetic`   |
 | 2           | Humble     | `humble`   |
 | 2           | Iron       | `iron`     |
+| 2           | Jazzy      | `jazzy`    |
 | 2           | Rolling    | `rolling`  |
 
 The images are tagged with the ROS version, type, version or commit hash, and date. For example, `noetic-base-0.1.0-20200818` is the image with ROS1 Melodic, type `base`, version `0.1.0` and date `20200818`. The image without version and date is the latest version of the image.
@@ -53,6 +54,6 @@ All the examples are in the `examples` folder.
 
 ## License
 
-Copyright (c) 2023, Robotnik Automation S.L. All rights reserved.
+Copyright (c) 2025, Robotnik Automation S.L. All rights reserved.
 
 Licensed under the [BSD 2-Clause](./LICENSE) License.

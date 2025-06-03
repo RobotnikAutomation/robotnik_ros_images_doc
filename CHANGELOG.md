@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+## [0.6.2] - 2025-06-03
+- Updated apt key file cause it was expired, now using the new key file.
 
 ## [0.6.1] - 2024-12-16
 - Updated call versions of external github actions to avoid future deprecation
@@ -45,7 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added fastdds package on ROS2 containers allowing, allowing to use it by setting up environment variable `RMW_IMPLEMENTATION=rmw_fastrtps_cpp`
 - Added `qt5ct` package at gui container in order to show toolbar icons on QT5 applications
 - Added `FAKE_SCREEN` environment variable to allow the use fake or dummy screen on applications that requires it (only on graphical container)
-- Added update of docker tools before building on `push-build.yml` github action workflow. 
+- Added update of docker tools before building on `push-build.yml` github action workflow.
 - Added reuse flag on, `push-build.yml` so other workflow can call it .
 - Added `-x, --buildx <ARCH_LIST>` option from `build.sh` script, to select the building architectures, multiarch indicated using comma.  default value `linux/amd64,linux/arm64/v8`
 - Added login on docker-hub in order to increase the docker pull rate to 200images/6h
@@ -63,7 +65,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved `weekly-build.yml` workflow calling `push-build.yml` instead of repeating same workflow.
 - Separated the architectures on `push-build.yml` workflow so can build in parallel speeding up the building.
 - Specified the use of self-hosted runners tagged `[self-hosted, internal-robotnik, kubernetes]` to enforce the use k8s automatic generated runners on `push-build.yml` workflow
-- Specified the use of self-hosted runners tagged `[self-hosted, internal-robotnik, kubernetes]` on `public-doc.yml` workflow so github minutes are not used. 
+- Specified the use of self-hosted runners tagged `[self-hosted, internal-robotnik, kubernetes]` on `public-doc.yml` workflow so github minutes are not used.
 - Use of ros apt local mirror on `base, builder, gui`
 - Script `build.sh` now uses the docker (compose build/buildx bake) style with `docker-compose.yaml`  as configuration file
 

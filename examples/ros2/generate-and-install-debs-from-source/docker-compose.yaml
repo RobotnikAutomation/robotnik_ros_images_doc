@@ -1,8 +1,7 @@
 ---
-name: "ros2-source-as-debs"
+name: "ros2-generate-and-install-debs-from-source"
 services:
   main:
-    image: robotnik/examples:humble-source-as-debs
     build:
       context: .
       dockerfile: Dockerfile

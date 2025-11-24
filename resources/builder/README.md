@@ -1,10 +1,14 @@
 # Builder image
 
-This image is used to build the ROS packages. It is based on the [base image](../base/README.md) and adds the tools to build the ROS packages.
+This image is used to build the ROS packages. It is based on the [base image](../base) and adds the tools to build the ROS packages.
 
 ## Environment variables
 
-The following environment variables are defined in the image:
+### Read-only Environment variables
+
+The following environment variables are defined during the build process of the image.
+
+The user can use them to retrieve information about the image and its environment. They are read-only and must not be modified by the user.
 
 | Variable | Description |
 |----------|-------------|
@@ -57,6 +61,21 @@ The script has the features:
   - `A.B.C` is the version contained in the `package.xml` file.
   - `YYYYMMDD.HHMMSS` is the UTC time when the package was generated.
   - `HASH` is the hash of commit of the repository where the package is located. (If the package is not in a repository, the hash will be `local`).
+- By default, only build dependencies are checked and installed via rosdep. This can be changed with the `-d` or `--deps-type` option or the `ROSDEP_DEPS_TYPE` environment variable:
+  - `build` (default): Only install and check build dependencies
+  - `all`: Install and check all dependencies (build, exec, run, test, etc.)
+
+#### Options
+
+- `-h, --help`: Show help message
+- `-r, --robotnik-package`: Compile robotnik package with rb- prefix instead of ros-
+- `-w, --whitelist <file>`: Path to whitelist file (default: debs/whitelist.txt)
+- `-d, --deps-type <type>`: Dependency type for rosdep (build|all, default: build)
+- `-v, --version`: Show version
+
+#### Environment Variables
+
+- `ROSDEP_DEPS_TYPE`: Dependency type for rosdep (build|all, default: build). Can be overridden by the `-d` option.
 
 ### generate_whitelist.sh
 
@@ -72,4 +91,4 @@ Install the PCAN driver. The script will download the driver from the internal r
 
 ## Installed packages
 
-Please refer to requirements folder for more information about the installed packages.
+The resulting image installs the packages listed in two files within the `requirements` folder: `common.txt` and the file corresponding to the current ROS distro (humble, jazzy, etc.).

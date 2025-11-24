@@ -1,8 +1,8 @@
 ---
-name: "rviz-web"
+name: "rviz2-rviz-web"
 services:
-  # Contains the rviz application
-  rviz-vnc:
+  # Contains the rviz2 application
+  rviz2-vnc:
     build:
       context: .
       dockerfile: Dockerfile.rviz
@@ -13,7 +13,7 @@ services:
       ROS_DOMAIN_ID: 0
       VNC_RFBPORT: 5900
       RVIZ_CFG_FILE: "/opt/ros/humble/share/rviz_common/default.rviz"
-      VNC_PASSWORD: "admin"
+      VNC_PASSWORD: "testing"
       VNC_GEOMETRY: "1280x1024"
     restart: always
 
@@ -34,7 +34,7 @@ services:
     environment:
       USE_ENV_CONFIG: "true"
       VERBOSE: "true"
-      VNC_HOST: rviz-vnc
+      VNC_HOST: rviz2-vnc
       VNC_PORT: 5900
       WS_PORT: 6080
     ports:

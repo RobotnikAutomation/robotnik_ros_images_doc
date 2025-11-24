@@ -1,5 +1,5 @@
 ARG base_image="robotnik/ros"
-ARG ros_distro=""
+ARG ros_distro="noetic"
 FROM ${base_image}:${ros_distro}-builder as builder
 
 # Download source code
@@ -13,7 +13,7 @@ RUN generate_debs.sh
 
 
 # Caution: this is a multi-stage build, the following stage will be the final image.
-# builder must not included in the final image.
+# builder must not be included in the final image.
 FROM ${base_image}:${ros_distro}-base
 
 # Mount debian packages from previous stage and install all of them

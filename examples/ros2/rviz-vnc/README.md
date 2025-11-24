@@ -9,4 +9,4 @@ cd examples/ros2/rviz-vnc
 docker compose up
 ```
 
-Using a VNC client, connect [localhost:5900](vnc://localhost:5900) and with the password `testing`
+Using a VNC client, connect [localhost:5900](vnc://localhost:5900) and with the password `testing`.

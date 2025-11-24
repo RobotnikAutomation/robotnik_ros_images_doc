@@ -1,5 +1,5 @@
 ---
-name: "rviz-nvidia"
+name: "ros2-nvidia-container-toolkit"
 services:
   rviz-nvidia:
     build:

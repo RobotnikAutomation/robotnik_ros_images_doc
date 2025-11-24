@@ -1,17 +1,14 @@
 ---
-name: "rviz-vnc"
+name: "rviz2-rviz-vnc"
+x-build: &builder
+  context: .
+  dockerfile: Dockerfile.rviz
+  args:
+    base_image: robotnik/ros
+    ros_distro: humble
 services:
-  builder:
-    image: ros2-examples:humble-rviz
-    build:
-      context: .
-      dockerfile: Dockerfile.rviz
-      args:
-        base_image: robotnik/ros
-        ros_distro: humble
-    command: "true"
-  talker-run:
-    image: ros2-examples:humble-rviz
+  rviz2-vnc:
+    build: *builder
     restart: always
     ports:
       - target: 5900

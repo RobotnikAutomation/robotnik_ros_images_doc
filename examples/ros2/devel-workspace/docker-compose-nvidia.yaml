@@ -1,5 +1,5 @@
 ---
-name: "project"
+name: "ros2-devel-workspace-nvidia"
 services:
   workspace:
     build:

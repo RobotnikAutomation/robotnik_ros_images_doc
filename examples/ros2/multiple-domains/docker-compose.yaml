@@ -1,17 +1,14 @@
 ---
-name: "multiple-domains"
+name: "ros2-multiple-domains"
+x-build: &builder
+  context: .
+  dockerfile: Dockerfile
+  args:
+    base_image: robotnik/ros
+    ros_distro: humble
 services:
-  builder:
-    image: ros2-examples:humble-basic
-    build:
-      context: .
-      dockerfile: Dockerfile.chatter
-      args:
-        base_image: robotnik/ros
-        ros_distro: humble
-    command: "true"
   talker-run:
-    image: ros2-examples:humble-basic
+    build: *builder
     restart: always
     environment:
       STARTUP_TYPE: "run"
@@ -22,7 +19,7 @@ services:
       NODES_TO_CHECK: ""
       HEALTHCHECK_NODES: "/talker"
   listener-run:
-    image: ros2-examples:humble-basic
+    build: *builder
     restart: always
     environment:
       STARTUP_TYPE: "run"
@@ -33,7 +30,7 @@ services:
       NODES_TO_CHECK: "/talker"
       HEALTHCHECK_NODES: "/listener"
   talker-launch:
-    image: ros2-examples:humble-basic
+    build: *builder
     environment:
       STARTUP_TYPE: "launch"
       ROS_DOMAIN_ID: 1
@@ -43,7 +40,7 @@ services:
       NODES_TO_CHECK: ""
       HEALTHCHECK_NODES: "/talker"
   listener-launch:
-    image: ros2-examples:humble-basic
+    build: *builder
     restart: always
     environment:
       STARTUP_TYPE: "launch"

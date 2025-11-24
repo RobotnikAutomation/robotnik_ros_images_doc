@@ -24,3 +24,4 @@ ENV CHECK_NODES "false"
 #### space separted node list with full namespace
 ENV NODES_TO_CHECK ""
 ENV HEALTHCHECK_NODES "/minimal_publisher"
+ENV POWERLINE "true"

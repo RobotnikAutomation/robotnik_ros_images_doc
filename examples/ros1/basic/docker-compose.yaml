@@ -3,8 +3,7 @@ name: "ros1-basic"
 services:
   # ROS CORE
   core:
-    image: robotnik/examples:noetic-basic
-    build:
+    build: &builder
       context: .
       dockerfile: Dockerfile
       args:
@@ -18,12 +17,7 @@ services:
 
   # TALKER NODE
   talker:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        base_image: robotnik/ros
-        ros_distro: noetic
+    build: *builder
     environment:
       ROS_MASTER_URI: http://core:11311
       ROS_HOSTNAME: talker
@@ -36,12 +30,7 @@ services:
 
   # LISTENER NODE
   listener:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        base_image: robotnik/ros
-        ros_distro: noetic
+    build: *builder
     environment:
       ROS_MASTER_URI: http://core:11311
       ROS_HOSTNAME: listener

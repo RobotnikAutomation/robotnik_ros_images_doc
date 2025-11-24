@@ -10,6 +10,7 @@ RUN apt update && \
         ros-${ROS_DISTRO}-demo-nodes-cpp \
     && rm -rf /var/lib/apt/lists/*
 
+# Bad practice. A new package should be created instead of modifying an installed one
 COPY --chmod=0644\
     talker.launch.xml \
     listener.launch.xml \

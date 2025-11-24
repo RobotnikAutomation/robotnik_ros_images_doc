@@ -1,10 +1,12 @@
 # GUI image
 
-This image is used to run the GUI applications. It is based on the [base image](../base/README.md) and adds the tools to run the GUI applications and the VNC server.
+This image is used to run the GUI applications. It is based on the [base image](../base) and adds the tools to run the GUI applications and the VNC server.
 
 ## Environment variables
 
-The following environment variables are defined in the image:
+The following environment variables are defined during the build process of the image.
+
+The user can use them to retrieve information about the image and its environment. They are read-only and must not be modified by the user.
 
 | Variable | Description |
 |----------|-------------|
@@ -35,4 +37,4 @@ The following scripts are installed in the image:
 
 ## Installed packages
 
-Please refer to requirements folder for more information about the installed packages.
+The resulting image installs the packages listed in two files within the `requirements` folder: `common.txt` and the file corresponding to the current ROS distro (humble, jazzy, etc.).

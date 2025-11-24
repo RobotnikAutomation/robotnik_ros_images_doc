@@ -1,22 +1,27 @@
 # Base image
 
-This image contains ROS installed. It is used as base image for the other images.
+This image contains ROS installed and other utilities from Robotnik. It is used as base image for the other images. It can be created for the different ROS distros.
 
 ## Environment variables
 
-The following environment variables are defined in the image:
+### Read-only Environment variables
 
-| Variable | Description |
-|----------|-------------|
-| `USER_NAME` | User name of the user with sudo privileges |
-| `USER_HOME` | Home directory of the user |
-| `USER_WORKSPACE` | ROS Workspace directory of the user |
-| `ROS_DISTRO` | ROS distro |
+The following environment variables are defined during the build process of the image.
 
+The user can use them to retrieve information about the image and its environment. They are read-only and must not be modified by the user.
 
-The following environment variables are defined in the image and can be used to configure the image:
+| Variable | Description | Value |
+|----------|-------------|-------|
+| `USER_NAME` | User name of the user with sudo privileges | `robot` |
+| `USER_HOME` | Home directory of the user | `/home/robot` |
+| `USER_WORKSPACE` | ROS Workspace directory of the user | `/home/robot/robot_ws` |
+| `ROS_DISTRO` | ROS distro | *actual ros distro* |
 
-### Launch configuration
+### Configurable Environment variables
+
+The following environment variables are used to configure the behavior of the derived images. They can be set by the end user either during the build process of the derived images (i.e., in the Dockerfile) or when creating the container (i.e., in the Docker Compose configuration).
+
+#### Launch configuration
 | Variable | Description | Default value |
 |----------|-------------|---------------|
 | `ROS_SETUP_FILES` | Additional setup files to source divided by `:` | `""` |
@@ -27,31 +32,31 @@ The following environment variables are defined in the image and can be used to 
 
 **Note:** The `STARTUP_TYPE`, `ROS_BU_PKG`, `ROS_BU_LAUNCH`, and `GEN_COMMAND` variables are ignored if command is passed to the container.
 
-### Interface configuration
+#### Interface configuration
 | Variable | Description | Default value |
 |----------|-------------|---------------|
 | `POWERLINE` | Use of the powerline prompt on bash | `false` |
 
-### Requirements configuration
+#### Requirements configuration
 | Variable | Description | Default value |
 |----------|-------------|---------------|
 | `CHECK_NODES` | Boolean to check if the nodes are running | `false` |
 | `NODES_TO_CHECK` | Space separted node list with full namespace | `""` |
 
-### Healthcheck configuration
+#### Healthcheck configuration
 | Variable | Description | Default value |
 |----------|-------------|---------------|
 | `HEALTHCHECK_EXEC` | Script or command to execute to check if the container is healthy | `ros_healthcheck.sh` |
 | `HEALTHCHECK_NODES` | Space separated node list with full namespace | `""` |
 
-### ROS1 configuration
+#### ROS1 configuration
 | Variable | Description | Default value |
 |----------|-------------|---------------|
 | `ROS_MASTER_URI` | URI of the ROS master | None |
 | `ROS_HOSTNAME` | Hostname of the ROS node | None |
 | `ROS_IP` | IP of the ROS node | None |
 
-### ROS2 configuration
+#### ROS2 configuration
 | Variable | Description | Default value |
 |----------|-------------|---------------|
 | `ROS_DOMAIN_ID` | Domain ID of the ROS node | `0` |
@@ -77,4 +82,4 @@ All scripts in the `ros_entrypoint.d` directory are executed in alphabetical ord
 
 ## Installed packages
 
-Please refer to requirements folder for more information about the installed packages.
+The resulting image installs the packages listed in two files within the `requirements` folder: `common.txt` and the file corresponding to the current ROS distro (humble, jazzy, etc.).

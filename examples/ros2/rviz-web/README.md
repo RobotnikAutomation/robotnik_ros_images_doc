@@ -9,4 +9,4 @@ cd examples/ros2/rviz-web
 docker compose up
 ```
 
-Using a using a web browser connect [http://localhost:6083](http://localhost:6083)
+Using a web browser connect [http://localhost:6083](http://localhost:6083) and with the password `testing`.
